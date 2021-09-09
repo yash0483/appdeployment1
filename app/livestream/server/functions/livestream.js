@@ -1,16 +1,6 @@
-import google from 'googleapis';
+import { google } from 'googleapis';
 
 const { OAuth2 } = google.auth;
-
-
-const p = (fn) => new Promise(function(resolve, reject) {
-	fn(function(err, value) {
-		if (err) {
-			return reject(err);
-		}
-		resolve(value.data);
-	});
-});
 
 export const getBroadcastStatus = async ({
 	id,
@@ -25,12 +15,13 @@ export const getBroadcastStatus = async ({
 		access_token,
 		refresh_token,
 	});
+
 	const youtube = google.youtube({ version: 'v3', auth });
-	const result = await p((resolve) => youtube.liveBroadcasts.list({
+	const result = await youtube.liveBroadcasts.list({
 		part: 'id,status',
 		id,
-	}, resolve));
-	return result.items && result.items[0] && result.items[0].status.lifeCycleStatus;
+	});
+	return result.items?.[0]?.status.lifeCycleStatus;
 };
 
 export const statusStreamLiveStream = async ({
@@ -48,10 +39,10 @@ export const statusStreamLiveStream = async ({
 	});
 
 	const youtube = google.youtube({ version: 'v3', auth });
-	const result = await p((resolve) => youtube.liveStreams.list({
+	const result = await youtube.liveStreams.list({
 		part: 'id,status',
 		id,
-	}, resolve));
+	});
 	return result.items && result.items[0].status.streamStatus;
 };
 
@@ -72,11 +63,11 @@ export const statusLiveStream = ({
 
 	const youtube = google.youtube({ version: 'v3', auth });
 
-	return p((resolve) => youtube.liveBroadcasts.transition({
+	return youtube.liveBroadcasts.transition({
 		part: 'id,status',
 		id,
 		broadcastStatus: status,
-	}, resolve));
+	});
 };
 
 export const setBroadcastStatus = ({
@@ -96,11 +87,11 @@ export const setBroadcastStatus = ({
 
 	const youtube = google.youtube({ version: 'v3', auth });
 
-	return p((resolve) => youtube.liveBroadcasts.transition({
+	return youtube.liveBroadcasts.transition({
 		part: 'id,status',
 		id,
 		broadcastStatus: status,
-	}, resolve));
+	});
 };
 
 export const createLiveStream = async ({
@@ -115,9 +106,10 @@ export const createLiveStream = async ({
 		access_token,
 		refresh_token,
 	});
+
 	const youtube = google.youtube({ version: 'v3', auth });
 
-	const [stream, broadcast] = await Promise.all([p((resolve) => youtube.liveStreams.insert({
+	const stream = await youtube.liveStreams.insert({
 		part: 'id,snippet,cdn,contentDetails,status',
 		resource: {
 			snippet: {
@@ -128,7 +120,9 @@ export const createLiveStream = async ({
 				ingestionType: 'rtmp',
 			},
 		},
-	}, resolve)), p((resolve) => youtube.liveBroadcasts.insert({
+	});
+
+	const broadcast = await youtube.liveBroadcasts.insert({
 		part: 'id,snippet,contentDetails,status',
 		resource: {
 			snippet: {
@@ -139,14 +133,14 @@ export const createLiveStream = async ({
 				privacyStatus: 'unlisted',
 			},
 		},
-	}, resolve))]);
+	});
 
-	await p((resolve) => youtube.liveBroadcasts.bind({
+	await youtube.liveBroadcasts.bind({
 		part: 'id,snippet,status',
 		// resource: {
 		id: broadcast.id,
 		streamId: stream.id,
-	}, resolve));
+	});
 
 	return { id: stream.cdn.ingestionInfo.streamName, stream, broadcast };
 };

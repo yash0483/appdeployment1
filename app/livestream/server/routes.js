@@ -1,4 +1,4 @@
-import google from 'googleapis';
+import { google } from 'googleapis';
 
 import { settings } from '../../settings';
 import { Users } from '../../models';
@@ -47,7 +47,7 @@ API.v1.addRoute('livestream/oauth/callback', {
 		const ret = Promise.await(clientAuth.getToken(code));
 
 		Users.update({ _id: userId }, { $set: {
-			'settings.livestream': ret,
+			'settings.livestream': ret.tokens,
 		} });
 
 		return {
