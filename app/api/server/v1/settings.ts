@@ -155,7 +155,8 @@ API.v1.addRoute(
 		post: {
 			twoFactorRequired: true,
 			async action(): Promise<ResultFor<'POST', 'settings/:_id'>> {
-				if (!hasPermission(this.userId, 'edit-privileged-setting')) {
+				const uid = this.userId;
+				if (!hasPermission(uid, 'edit-privileged-setting')) {
 					return API.v1.unauthorized();
 				}
 
@@ -180,13 +181,13 @@ API.v1.addRoute(
 					Settings.updateOptionsById<ISettingColor>(this.urlParams._id, {
 						editor: this.bodyParams.editor,
 					});
-					Settings.updateValueNotHiddenById(this.urlParams._id, this.bodyParams.value);
+					await Settings.updateValueNotHiddenById(this.urlParams._id, this.bodyParams.value, uid);
 					return API.v1.success();
 				}
 
 				if (
 					isSettingsUpdatePropDefault(this.bodyParams) &&
-					(await Settings.updateValueNotHiddenById(this.urlParams._id, this.bodyParams.value))
+					(await Settings.updateValueNotHiddenById(this.urlParams._id, this.bodyParams.value, uid))
 				) {
 					const s = await Settings.findOneNotHiddenById(this.urlParams._id);
 					if (!s) {

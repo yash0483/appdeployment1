@@ -55,7 +55,9 @@ Meteor.methods({
 			});
 		}
 
-		await Promise.all(params.map(({ _id, value, editor }) => Settings.updateValueById(_id, value, editor)));
+		console.log('-=============================================');
+		console.log('doing something with the setting');
+		await Promise.all(params.map(({ _id, value, editor }) => Settings.updateValueById(_id, value, editor, uid)));
 
 		return true;
 	}, {}),
