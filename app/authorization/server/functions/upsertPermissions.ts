@@ -199,6 +199,7 @@ export const upsertPermissions = async (): Promise<void> => {
 		{ _id: 'pin-message', roles: ['owner', 'moderator', 'admin'] },
 		{ _id: 'snippet-message', roles: ['owner', 'moderator', 'admin'] },
 		{ _id: 'mobile-upload-file', roles: ['user', 'admin'] },
+		{ _id: 'view-setting-audit-data', roles: ['admin'] },
 	];
 
 	for await (const permission of permissions) {
@@ -275,7 +276,7 @@ export const upsertPermissions = async (): Promise<void> => {
 			try {
 				await Permissions.update({ _id: permissionId }, { $set: permission }, { upsert: true });
 			} catch (e) {
-				if (!e.message.includes('E11000')) {
+				if (!(e as Error).message.includes('E11000')) {
 					// E11000 refers to a MongoDB error that can occur when using unique indexes for upserts
 					// https://docs.mongodb.com/manual/reference/method/db.collection.update/#use-unique-indexes
 					await Permissions.update({ _id: permissionId }, { $set: permission }, { upsert: true });

@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { ServiceConfiguration } from 'meteor/service-configuration';
 import _ from 'underscore';
 
-import { Settings } from '../../../models/server/raw';
+import { Settings, ServerEvents } from '../../../models/server/raw';
 import { hasPermission } from '../../../authorization/server';
 import { API, ResultFor } from '../api';
 import { SettingsEvents, settings } from '../../../settings/server';
@@ -212,6 +212,22 @@ API.v1.addRoute(
 			return API.v1.success({
 				configurations: ServiceConfiguration.configurations.find({}, { fields: { secret: 0 } }).fetch(),
 			});
+		},
+	},
+);
+
+API.v1.addRoute(
+	'settings/audit',
+	{ authRequired: true, permissionsRequired: ['view-setting-audit-data'] },
+	{
+		async get() {
+			const { id, from, to } = this.queryParams;
+			const { offset: skip, count: limit } = this.getPaginationItems();
+
+			if (id) {
+				return API.v1.success(await ServerEvents.findBySettingIdBetweenDates(id, from, to, { skip, limit }).toArray());
+			}
+			return API.v1.success(await ServerEvents.findAuditBetweenDates(from, to, { skip, limit }).toArray());
 		},
 	},
 );

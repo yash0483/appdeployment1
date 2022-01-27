@@ -1,3 +1,4 @@
+import { IServerEvent } from '../../IServerEvent';
 import { ISetting, ISettingColor } from '../../ISetting';
 import { PaginatedResult } from '../helpers/PaginatedResult';
 
@@ -98,5 +99,9 @@ export type SettingsEndpoints = {
 				secret: string;
 			}>;
 		};
+	};
+
+	'settings/audit': {
+		GET: (params: { id?: string; from?: string; to?: string }) => IServerEvent[];
 	};
 };

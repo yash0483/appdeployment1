@@ -1,3 +1,5 @@
+import { Cursor } from 'mongodb';
+
 import { BaseRaw, IndexSpecification } from './BaseRaw';
 import { IServerEvent, IServerEventType } from '../../../../definition/IServerEvent';
 
@@ -56,5 +58,45 @@ export class ServerEventsRaw extends BaseRaw<IServerEvent> {
 			'u.username': username,
 			't': IServerEventType.FAILED_LOGIN_ATTEMPT,
 		}).count();
+	}
+
+	findBySettingIdBetweenDates(
+		id: string,
+		from?: string,
+		to?: string,
+		pagination: { skip: number; limit: number } = { skip: 0, limit: 10 },
+	): Cursor<IServerEvent> {
+		const ts = {
+			...(from && { $lte: new Date(from) }),
+			...(to && { $gt: new Date(to) }),
+		};
+
+		return this.find(
+			{
+				't': IServerEventType.SETTING_MODIFIED,
+				'extraData.settingId': id,
+				ts,
+			},
+			{ ...pagination },
+		);
+	}
+
+	findAuditBetweenDates(
+		from?: string,
+		to?: string,
+		pagination: { skip: number; limit: number } = { skip: 0, limit: 10 },
+	): Cursor<IServerEvent> {
+		const ts = {
+			...(from && { $lte: new Date(from) }),
+			...(to && { $gt: new Date(to) }),
+		};
+
+		return this.find(
+			{
+				t: IServerEventType.SETTING_MODIFIED,
+				ts,
+			},
+			{ ...pagination },
+		);
 	}
 }
