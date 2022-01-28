@@ -76,3 +76,4 @@ import './stream/streamBroadcast';
 import './settings/index';
 
 import './features/EmailInbox/index';
+import '../lib/settingsChangeWatcher';

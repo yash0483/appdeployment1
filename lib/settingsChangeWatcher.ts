@@ -1,8 +1,9 @@
-import { ServerEvents } from '../../../models/server/raw';
-import { settings } from '../../../settings/server';
-import { IServerEventType } from '../../../../definition/IServerEvent';
-import { SettingValue } from '../../../../definition/ISetting';
-import { Logger } from '../../../logger/server';
+import { ServerEvents } from '../app/models/server/raw';
+import { settings } from '../app/settings/server';
+import { IServerEventType } from '../definition/IServerEvent';
+import { SettingValue } from '../definition/ISetting';
+import { Logger } from '../app/logger/server';
+import { serverEvents } from './serverEvents';
 
 const logger = new Logger('SettingChangeWatcher');
 
@@ -26,9 +27,11 @@ export const storeSettingChanged = async (settingId: string, targetValue: Settin
 	};
 
 	try {
-		logger.debug(`Setting ${settingId} changed by ${uid}`);
 		await ServerEvents.insertOne(event);
+		logger.debug(`Setting ${settingId} changed by ${uid}`);
 	} catch (err) {
 		logger.error({ msg: 'An error ocurred while storing setting audit metadata', err, settingId });
 	}
 };
+
+serverEvents.addEventListener(IServerEventType.SETTING_MODIFIED, storeSettingChanged);

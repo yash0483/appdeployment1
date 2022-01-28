@@ -2,7 +2,7 @@ import { Cursor, FilterQuery, UpdateQuery, WriteOpResult } from 'mongodb';
 
 import { BaseRaw } from './BaseRaw';
 import { ISetting, ISettingColor, ISettingSelectOption } from '../../../../definition/ISetting';
-import { storeSettingChanged } from '../../../authentication/server/lib/settingsChangeWatcher';
+import { serverEvents, IServerEventTypes } from '../../../../lib/serverEvents';
 
 export class SettingsRaw extends BaseRaw<ISetting> {
 	async getValueById(_id: string): Promise<ISetting['value'] | undefined> {
@@ -63,8 +63,10 @@ export class SettingsRaw extends BaseRaw<ISetting> {
 				value,
 			},
 		};
+		console.log('--------------------------');
+		console.log(_id, value, _editor, uid);
 
-		await storeSettingChanged(_id, value, uid);
+		serverEvents.emit(IServerEventTypes.SETTING_MODIFIED, _id, value, uid);
 		return this.update(query, update);
 	}
 
@@ -96,7 +98,7 @@ export class SettingsRaw extends BaseRaw<ISetting> {
 			},
 		};
 
-		await storeSettingChanged(_id, value, uid);
+		serverEvents.emit(IServerEventTypes.SETTING_MODIFIED, _id, value, uid);
 		return this.update(query, update);
 	}
 
@@ -119,7 +121,7 @@ export class SettingsRaw extends BaseRaw<ISetting> {
 			},
 		};
 
-		await storeSettingChanged(_id, value, uid);
+		serverEvents.emit(IServerEventTypes.SETTING_MODIFIED, _id, value, uid);
 		return this.update(query, update);
 	}
 
