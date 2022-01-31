@@ -25,6 +25,7 @@ import type { SettingsEndpoints } from './v1/settings';
 import type { StatisticsEndpoints } from './v1/statistics';
 import type { TeamsEndpoints } from './v1/teams';
 import type { UsersEndpoints } from './v1/users';
+import type { WebdavEndpoints } from './v1/webdav';
 
 type CommunityEndpoints = BannersEndpoints &
 	ChatEndpoints &
@@ -49,7 +50,8 @@ type CommunityEndpoints = BannersEndpoints &
 	MiscEndpoints &
 	PermissionsEndpoints &
 	InstancesEndpoints &
-	InvitesEndpoints;
+	InvitesEndpoints &
+	WebdavEndpoints;
 
 type Endpoints = CommunityEndpoints & EnterpriseEndpoints;
 

@@ -11,6 +11,7 @@ import { SaveRoomSettingsMethod } from './methods/saveRoomSettings';
 import { SaveSettingsMethod } from './methods/saveSettings';
 import { SaveUserPreferencesMethod } from './methods/saveUserPreferences';
 import { UnfollowMessageMethod } from './methods/unfollowMessage';
+import { UploadFileToWebdav } from './methods/uploadFileToWebdav';
 
 export type ServerMethods = {
 	'2fa:checkCodesRemaining': (...args: any[]) => any;
@@ -139,6 +140,7 @@ export type ServerMethods = {
 	'updateOAuthApp': (...args: any[]) => any;
 	'updateOutgoingIntegration': (...args: any[]) => any;
 	'uploadCustomSound': (...args: any[]) => any;
+	'uploadFileToWebdav': UploadFileToWebdav;
 	'Mailer:unsubscribe': MailerUnsubscribeMethod;
 	'getRoomById': (rid: IRoom['_id']) => IRoom;
 	'getReadReceipts': GetReadReceiptsMethod;

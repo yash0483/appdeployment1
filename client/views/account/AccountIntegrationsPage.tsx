@@ -2,20 +2,16 @@ import { Box, Select, SelectOptions, Field, Button } from '@rocket.chat/fuselage
 import React, { useMemo, useCallback, ReactElement } from 'react';
 
 import { WebdavAccounts } from '../../../app/models/client';
-import { IWebdavAccount } from '../../../definition/IWebdavAccount';
+import { WebdavAccountIntegration } from '../../../definition/IWebdavAccount';
 import Page from '../../components/Page';
 import { useMethod } from '../../contexts/ServerContext';
 import { useToastMessageDispatch } from '../../contexts/ToastMessagesContext';
 import { useTranslation } from '../../contexts/TranslationContext';
 import { useForm } from '../../hooks/useForm';
 import { useReactiveValue } from '../../hooks/useReactiveValue';
-
-type WebdavAccountIntegration = Omit<IWebdavAccount, 'userId' | 'password' | '_updatedAt'>;
+import { getWebdavServerName } from '../../lib/getWebdavServerName';
 
 const getWebdavAccounts = (): Array<WebdavAccountIntegration> => WebdavAccounts.find().fetch();
-
-const getServerName = ({ name, serverURL, username }: Omit<WebdavAccountIntegration, '_id'>): string =>
-	name || `${username}@${serverURL?.replace(/^https?\:\/\//i, '')}`;
 
 const AccountIntegrationsPage = (): ReactElement => {
 	const t = useTranslation();
@@ -28,7 +24,7 @@ const AccountIntegrationsPage = (): ReactElement => {
 		handlers: { handleSelected },
 	} = useForm({ selected: [] });
 
-	const options: SelectOptions = useMemo(() => accounts.map(({ _id, ...current }) => [_id, getServerName(current)]), [accounts]);
+	const options: SelectOptions = useMemo(() => accounts?.map(({ _id, ...current }) => [_id, getWebdavServerName(current)]), [accounts]);
 
 	const handleClickRemove = useCallback(() => {
 		try {

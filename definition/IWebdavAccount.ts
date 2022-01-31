@@ -8,4 +8,6 @@ export interface IWebdavAccount extends IRocketChatRecord {
 	name: string;
 }
 
+export type WebdavAccountIntegration = Omit<IWebdavAccount, 'userId' | 'password' | '_updatedAt'>;
+
 export type IWebdavAccountPayload = Omit<IWebdavAccount, 'userId' | '_id' | '_updatedAt'>;
