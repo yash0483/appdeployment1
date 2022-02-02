@@ -63,8 +63,6 @@ export class SettingsRaw extends BaseRaw<ISetting> {
 				value,
 			},
 		};
-		console.log('--------------------------');
-		console.log(_id, value, _editor, uid);
 
 		serverEvents.emit(IServerEventTypes.SETTING_MODIFIED, _id, value, uid);
 		return this.update(query, update);

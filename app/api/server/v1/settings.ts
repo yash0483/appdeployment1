@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { ServiceConfiguration } from 'meteor/service-configuration';
 import _ from 'underscore';
+import farmhash from 'farmhash';
 
 import { Settings, ServerEvents } from '../../../models/server/raw';
 import { hasPermission } from '../../../authorization/server';
@@ -225,9 +226,11 @@ API.v1.addRoute(
 			const { offset: skip, count: limit } = this.getPaginationItems();
 
 			if (id) {
-				return API.v1.success(await ServerEvents.findBySettingIdBetweenDates(id, from, to, { skip, limit }).toArray());
+				return API.v1.success(
+					await ServerEvents.findSettingEventsByIndexHashIdBetweenDate(farmhash.fingerprint64(id), from, to, { skip, limit }).toArray(),
+				);
 			}
-			return API.v1.success(await ServerEvents.findAuditBetweenDates(from, to, { skip, limit }).toArray());
+			return API.v1.success(await ServerEvents.findSettingEventsAuditBetweenDates(from, to, { skip, limit }).toArray());
 		},
 	},
 );

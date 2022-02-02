@@ -9,6 +9,7 @@ export enum IServerEventType {
 export interface IServerEvent {
 	_id: string;
 	t: IServerEventType;
+	indexHash: string;
 	ts: Date;
 	ip?: string;
 	u?: Partial<Pick<IUser, '_id' | 'username'>>;

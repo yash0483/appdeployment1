@@ -1,4 +1,5 @@
 import moment from 'moment';
+import farmhash from 'farmhash';
 
 import { ILoginAttempt } from '../ILoginAttempt';
 import { ServerEvents, Users, Rooms, Sessions } from '../../../models/server/raw';
@@ -136,9 +137,12 @@ export const saveFailedLoginAttempts = async (login: ILoginAttempt): Promise<voi
 		username: login.user?.username || login.methodArguments[0].user?.username,
 	};
 
+	const userIp = getClientAddress(login.connection);
+	const hashKey = `${login.type}-${login.methodName}-${userIp}`;
 	await ServerEvents.insertOne({
-		ip: getClientAddress(login.connection),
+		ip: userIp,
 		t: IServerEventType.FAILED_LOGIN_ATTEMPT,
+		indexHash: farmhash.fingerprint64(hashKey),
 		ts: new Date(),
 		u: user,
 	});
@@ -150,9 +154,12 @@ export const saveSuccessfulLogin = async (login: ILoginAttempt): Promise<void> =
 		username: login.user?.username || login.methodArguments[0].user?.username,
 	};
 
+	const userIp = getClientAddress(login.connection);
+	const hashKey = `${login.type}-${login.methodName}-${userIp}`;
 	await ServerEvents.insertOne({
 		ip: getClientAddress(login.connection),
 		t: IServerEventType.LOGIN,
+		indexHash: farmhash.fingerprint64(hashKey),
 		ts: new Date(),
 		u: user,
 	});
