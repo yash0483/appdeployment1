@@ -6,6 +6,7 @@ import type { IUser } from '../IUser';
 import type { ChannelName, RoomID } from '../IRoom';
 import type { MessageAttachment } from './MessageAttachment/MessageAttachment';
 import type { FileProp } from './MessageAttachment/Files/FileProp';
+import { intersection } from 'underscore';
 
 type MentionType = 'user' | 'team';
 
@@ -72,6 +73,14 @@ export interface IMessage extends IRocketChatRecord {
 	files?: FileProp[];
 	attachments?: MessageAttachment[];
 }
+
+export interface IMessageDiscussion extends IMessage {
+	drid: RoomID;
+}
+
+export const isMessageDiscussion = (message: IMessage): message is IMessageDiscussion => {
+	return 'drid' in message;
+};
 
 export type IMessageEdited = IMessage & {
 	editedAt: Date;
