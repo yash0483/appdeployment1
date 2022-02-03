@@ -2,7 +2,7 @@ import { Box, Select, SelectOptions, Field, Button } from '@rocket.chat/fuselage
 import React, { useMemo, useCallback, ReactElement } from 'react';
 
 import { WebdavAccounts } from '../../../app/models/client';
-import { WebdavAccountIntegration } from '../../../definition/IWebdavAccount';
+import { IWebdavAccountIntegration } from '../../../definition/IWebdavAccount';
 import Page from '../../components/Page';
 import { useMethod } from '../../contexts/ServerContext';
 import { useToastMessageDispatch } from '../../contexts/ToastMessagesContext';
@@ -11,7 +11,7 @@ import { useForm } from '../../hooks/useForm';
 import { useReactiveValue } from '../../hooks/useReactiveValue';
 import { getWebdavServerName } from '../../lib/getWebdavServerName';
 
-const getWebdavAccounts = (): Array<WebdavAccountIntegration> => WebdavAccounts.find().fetch();
+const getWebdavAccounts = (): Array<IWebdavAccountIntegration> => WebdavAccounts.find().fetch();
 
 const AccountIntegrationsPage = (): ReactElement => {
 	const t = useTranslation();

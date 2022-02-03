@@ -1,4 +1,3 @@
-// export type AddWebdavAccountMethod = (data: IWebdavAccountPayload) => void;
 import { IWebdavAccount } from '../../../../definition/IWebdavAccount';
 import { TranslationKey } from '../../TranslationContext';
 
