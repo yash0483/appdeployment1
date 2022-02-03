@@ -6,7 +6,6 @@ import type { IUser } from '../IUser';
 import type { ChannelName, RoomID } from '../IRoom';
 import type { MessageAttachment } from './MessageAttachment/MessageAttachment';
 import type { FileProp } from './MessageAttachment/Files/FileProp';
-import { intersection } from 'underscore';
 
 type MentionType = 'user' | 'team';
 
