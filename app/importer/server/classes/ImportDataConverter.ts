@@ -306,7 +306,7 @@ export class ImportDataConverter {
 	}
 
 	public convertUsers({ beforeImportFn, afterImportFn }: IConversionCallbacks = {}): void {
-		const users = Promise.await(this.getUsersToImport());
+		const users = Promise.await(this.getUsersToImport()) as IImportUserRecord[];
 		users.forEach(({ data, _id }) => {
 			try {
 				if (beforeImportFn && !beforeImportFn(data, 'user')) {
@@ -314,7 +314,7 @@ export class ImportDataConverter {
 					return;
 				}
 
-				data.emails = data.emails.filter((item) => item);
+				const emails = data.emails.filter(Boolean).map((email) => ({ address: email }));
 				data.importIds = data.importIds.filter((item) => item);
 
 				if (!data.emails.length && !data.username) {
@@ -330,7 +330,7 @@ export class ImportDataConverter {
 				if (!data.username) {
 					data.username = generateUsernameSuggestion({
 						name: data.name,
-						emails: data.emails,
+						emails,
 					});
 				}
 
