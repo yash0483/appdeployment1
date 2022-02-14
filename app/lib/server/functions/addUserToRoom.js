@@ -8,6 +8,7 @@ import { Team } from '../../../../server/sdk';
 import { RoomMemberActions, roomTypes } from '../../../utils/server';
 
 export const addUserToRoom = function (rid, user, inviter, silenced) {
+	console.log(callbacks);
 	const now = new Date();
 	const room = Rooms.findOneById(rid);
 
