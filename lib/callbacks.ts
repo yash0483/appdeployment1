@@ -53,6 +53,7 @@ type EventLikeCallbackSignatures = {
  * TODO: develop a middleware alternative and grant independence of execution order
  */
 type ChainedCallbackSignatures = {
+	'beforeDeleteRoom': (rid: string) => string;
 	'afterCreateUser': (user: IUser) => IUser;
 	'afterDeleteRoom': (rid: IRoom['_id']) => IRoom['_id'];
 	'livechat:afterOnHold': (room: IRoom) => IRoom;
