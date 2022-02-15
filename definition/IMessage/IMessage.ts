@@ -49,6 +49,9 @@ export interface IMessage extends IRocketChatRecord {
 	alias?: string;
 	md?: ReturnType<typeof parser>;
 
+	editedAt: Date;
+	editedBy: Record<string, string>;
+
 	_hidden?: boolean;
 	imported?: boolean;
 	replies?: IUser['_id'][];

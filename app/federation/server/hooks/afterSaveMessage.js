@@ -6,6 +6,7 @@ import { getFederationDomain } from '../lib/getFederationDomain';
 import { dispatchEvent } from '../handler';
 
 async function afterSaveMessage(message, room) {
+	console.log(message, room);
 	// If there are not federated users on this room, ignore it
 	if (!hasExternalDomain(room)) {
 		return message;
