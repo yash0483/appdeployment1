@@ -11,6 +11,8 @@ import { parseUrlsInMessage } from './parseUrlsInMessage';
 const { DISABLE_MESSAGE_PARSER = 'false' } = process.env;
 
 export const updateMessage = function (message, user, originalMessage) {
+	console.log(message, user, originalMessage);
+
 	if (!originalMessage) {
 		originalMessage = Messages.findOneById(message._id);
 	}

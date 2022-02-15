@@ -1,12 +1,13 @@
-import { Rooms, Subscriptions, Messages } from '../../../models';
-import { callbacks } from '../../../../lib/callbacks';
+import { Meteor } from 'meteor/meteor';
 
-export const addUserToDefaultChannels = function (user, silenced) {
-	callbacks.run('beforeJoinDefaultChannels', user);
+import { Rooms, Subscriptions, Messages } from '../../../models/server';
+import { IRoom } from '../../../../definition/IRoom';
+
+export const addUserToDefaultChannels = function (user: Meteor.User, silenced: boolean): void {
 	const defaultRooms = Rooms.findByDefaultAndTypes(true, ['c', 'p'], {
 		fields: { usernames: 0 },
 	}).fetch();
-	defaultRooms.forEach((room) => {
+	defaultRooms.forEach((room: IRoom) => {
 		if (!Subscriptions.findOneByRoomIdAndUserId(room._id, user._id)) {
 			// Add a subscription to this user
 			Subscriptions.createWithRoomAndUser(room, user, {

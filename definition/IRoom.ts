@@ -70,6 +70,8 @@ export interface IRoom extends IRocketChatRecord {
 
 	usernames?: string[];
 	ts?: Date;
+
+	favorite: { f: boolean };
 }
 
 export interface ICreatedRoom extends IRoom {
