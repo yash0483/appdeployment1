@@ -1,6 +1,6 @@
 import { Users } from '../../../models/server';
 
-export const getStatusText = function (userId) {
+export const getStatusText = function (userId: string): string | undefined {
 	if (!userId) {
 		return undefined;
 	}
@@ -15,5 +15,6 @@ export const getStatusText = function (userId) {
 	};
 
 	const data = Users.findOneById(userId, options);
-	return data && data.statusText;
+	console.log(data?.statusText);
+	return data?.statusText;
 };

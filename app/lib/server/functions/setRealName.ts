@@ -10,7 +10,6 @@ import { api } from '../../../../server/sdk/api';
 
 export const _setRealName = function (userId: string, name: string, fullUser: IUser): IUser | boolean {
 	name = s.trim(name);
-
 	if (!userId || (settings.get('Accounts_RequireNameForSignUp') && !name)) {
 		return false;
 	}
