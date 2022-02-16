@@ -5,7 +5,7 @@ import moment from 'moment';
 import { Messages } from '../../../models';
 import { settings } from '../../../settings';
 import { hasPermission, canSendMessage } from '../../../authorization/server';
-import { updateMessage } from '../functions';
+import { updateMessage } from '../../../../server/lib/updateMessage';
 
 Meteor.methods({
 	updateMessage(message) {

@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 import { hasPermission } from '../../../authorization/server';
-import { addOAuthService } from '../functions/addOAuthService';
+import { addOAuthService } from '../../../../server/lib/addOAuthService';
 
 Meteor.methods({
 	addOAuthService(name) {

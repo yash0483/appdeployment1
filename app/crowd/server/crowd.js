@@ -4,7 +4,7 @@ import { SyncedCron } from 'meteor/littledata:synced-cron';
 import { Accounts } from 'meteor/accounts-base';
 
 import { Logger } from '../../logger/server';
-import { _setRealName } from '../../lib/server';
+import { _setRealName } from '../../../server/lib/setRealName';
 import { Users } from '../../models/server';
 import { settings } from '../../settings/server';
 import { hasRole } from '../../authorization/server';

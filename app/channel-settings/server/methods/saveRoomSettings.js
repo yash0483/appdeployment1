@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Match, check } from 'meteor/check';
 
-import { setRoomAvatar } from '../../../lib/server/functions/setRoomAvatar';
+import { setRoomAvatar } from '../../../../server/lib/setRoomAvatar';
 import { hasPermission } from '../../../authorization';
 import { Rooms } from '../../../models';
 import { callbacks } from '../../../../lib/callbacks';

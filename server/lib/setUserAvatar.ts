@@ -1,12 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { fetch } from 'meteor/fetch';
 
-import { RocketChatFile } from '../../../file/server';
-import { FileUpload } from '../../../file-upload/server';
-import { Users } from '../../../models/server';
-import { SystemLogger } from '../../../../server/lib/logger/system';
-import { api } from '../../../../server/sdk/api';
-import { IUser } from '../../../../definition/IUser';
+import { RocketChatFile } from '../../app/file/server';
+import { FileUpload } from '../../app/file-upload/server';
+import { Users } from '../../app/models/server';
+import { SystemLogger } from './logger/system';
+import { api } from '../sdk/api';
+import { IUser } from '../../definition/IUser';
 
 export const setUserAvatar = function (
 	user: Pick<IUser, '_id' | 'username'>,

@@ -6,7 +6,7 @@ import { contextDefinitions, eventTypes } from '../../../models/server/models/Fe
 import { FederationRoomEvents, Messages, Rooms, Subscriptions, Users } from '../../../models/server';
 import { FederationServers } from '../../../models/server/raw';
 import { normalizers } from '../normalizers';
-import { deleteRoom } from '../../../lib/server/functions';
+import { deleteRoom } from '../../../../server/lib/deleteRoom';
 import { Notifications } from '../../../notifications/server';
 import { FileUpload } from '../../../file-upload';
 import { getFederationDomain } from '../lib/getFederationDomain';

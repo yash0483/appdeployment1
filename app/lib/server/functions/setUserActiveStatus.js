@@ -7,7 +7,7 @@ import { Users, Subscriptions, Rooms } from '../../../models';
 import { settings } from '../../../settings';
 import { callbacks } from '../../../../lib/callbacks';
 import { relinquishRoomOwnerships } from './relinquishRoomOwnerships';
-import { closeOmnichannelConversations } from './closeOmnichannelConversations';
+import { closeOmnichannelConversations } from '../../../../server/lib/closeOmnichannelConversations';
 import { shouldRemoveOrChangeOwner, getSubscribedRoomsForUserWithDetails } from './getRoomsWithSingleOwner';
 import { getUserSingleOwnedRooms } from './getUserSingleOwnedRooms';
 

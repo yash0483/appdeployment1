@@ -40,8 +40,8 @@ import {
 } from '../../../authorization/server';
 import * as Mailer from '../../../mailer';
 import { sendMessage } from '../../../lib/server/functions/sendMessage';
-import { updateMessage } from '../../../lib/server/functions/updateMessage';
-import { deleteMessage } from '../../../lib/server/functions/deleteMessage';
+import { updateMessage } from '../../../../server/lib/updateMessage';
+import { deleteMessage } from '../../../../server/lib/deleteMessage';
 import { FileUpload } from '../../../file-upload/server';
 import { normalizeTransferredByData, parseAgentCustomFields, updateDepartmentAgents, validateEmail } from './Helper';
 import { Apps, AppEvents } from '../../../apps/server';

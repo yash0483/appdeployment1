@@ -1,9 +1,9 @@
 import { _setUsername } from './setUsername';
-import { _setRealName } from './setRealName';
+import { _setRealName } from '../../../../server/lib/setRealName';
 import { Messages, Rooms, Subscriptions, LivechatDepartmentAgents, Users } from '../../../models/server';
 import { FileUpload } from '../../../file-upload/server';
 import { updateGroupDMsName } from './updateGroupDMsName';
-import { validateName } from './validateName';
+import { validateName } from '../../../../server/lib/validateName';
 
 /**
  *

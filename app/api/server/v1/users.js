@@ -14,10 +14,10 @@ import {
 	saveUser,
 	saveCustomFieldsWithoutValidation,
 	checkUsernameAvailability,
-	setUserAvatar,
 	saveCustomFields,
-	setStatusText,
 } from '../../../lib/server';
+import { setStatusText } from '../../../../server/lib/setStatusText';
+import { setUserAvatar } from '../../../../server/lib/setUserAvatar';
 import { getFullUserDataByIdOrUsername } from '../../../lib/server/functions/getFullUserData';
 import { API } from '../api';
 import { getUploadFormData } from '../lib/getUploadFormData';

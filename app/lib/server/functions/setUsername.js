@@ -9,7 +9,8 @@ import { hasPermission } from '../../../authorization';
 import { RateLimiter } from '../lib';
 import { addUserToRoom } from './addUserToRoom';
 import { api } from '../../../../server/sdk/api';
-import { checkUsernameAvailability, setUserAvatar } from '.';
+import { checkUsernameAvailability } from '.';
+import { setUserAvatar } from '../../../../server/lib/setUserAvatar';
 import { getAvatarSuggestionForUser } from './getAvatarSuggestionForUser';
 import { SystemLogger } from '../../../../server/lib/logger/system';
 

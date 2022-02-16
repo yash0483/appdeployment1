@@ -11,7 +11,10 @@ import { passwordPolicy } from '../lib/passwordPolicy';
 import { validateEmailDomain } from '../lib';
 import { getNewUserRoles } from '../../../../server/services/user/lib/getNewUserRoles';
 import { saveUserIdentity } from './saveUserIdentity';
-import { checkEmailAvailability, checkUsernameAvailability, setUserAvatar, setEmail, setStatusText } from '.';
+import { checkUsernameAvailability, setEmail } from '.';
+import { setStatusText } from '../../../../server/lib/setStatusText';
+import { setUserAvatar } from '../../../../server/lib/setUserAvatar';
+import { checkEmailAvailability } from '../../../../server/lib/checkEmailAvailability';
 import { Users } from '../../../models/server';
 import { callbacks } from '../../../../lib/callbacks';
 

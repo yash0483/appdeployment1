@@ -1,14 +1,14 @@
 import { Meteor } from 'meteor/meteor';
 
-import { FileUpload } from '../../../file-upload/server';
-import { settings } from '../../../settings/server';
-import { Messages, Rooms } from '../../../models/server';
-import { Uploads } from '../../../models/server/raw';
-import { Notifications } from '../../../notifications/server';
-import { callbacks } from '../../../../lib/callbacks';
-import { Apps } from '../../../apps/server';
-import { IMessage } from '../../../../definition/IMessage';
-import { IUser } from '../../../../definition/IUser';
+import { FileUpload } from '../../app/file-upload/server';
+import { settings } from '../../app/settings/server';
+import { Messages, Rooms } from '../../app/models/server';
+import { Uploads } from '../../app/models/server/raw';
+import { Notifications } from '../../app/notifications/server';
+import { callbacks } from '../../lib/callbacks';
+import { Apps } from '../../app/apps/server';
+import { IMessage } from '../../definition/IMessage';
+import { IUser } from '../../definition/IUser';
 
 export const deleteMessage = async function (message: IMessage, user: IUser): Promise<void> {
 	const deletedMsg = Messages.findOneById(message._id);

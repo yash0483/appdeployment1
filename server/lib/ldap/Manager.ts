@@ -19,7 +19,7 @@ import { getLDAPConditionalSetting } from './getLDAPConditionalSetting';
 import { logger, authLogger, connLogger } from './Logger';
 import type { IConverterOptions } from '../../../app/importer/server/classes/ImportDataConverter';
 import { callbacks } from '../../../lib/callbacks';
-import { setUserAvatar } from '../../../app/lib/server/functions';
+import { setUserAvatar } from '../setUserAvatar';
 
 export class LDAPManager {
 	public static async login(username: string, password: string): Promise<LDAPLoginResult> {

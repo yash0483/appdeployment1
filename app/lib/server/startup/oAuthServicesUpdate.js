@@ -5,7 +5,7 @@ import _ from 'underscore';
 import { CustomOAuth } from '../../../custom-oauth';
 import { Logger } from '../../../logger';
 import { settings } from '../../../settings/server';
-import { addOAuthService } from '../functions/addOAuthService';
+import { addOAuthService } from '../../../../server/lib/addOAuthService';
 
 const logger = new Logger('rocketchat:lib');
 

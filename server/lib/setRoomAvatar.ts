@@ -1,10 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 
-import { RocketChatFile } from '../../../file';
-import { FileUpload } from '../../../file-upload/server';
-import { Rooms, Messages } from '../../../models/server';
-import { Avatars } from '../../../models/server/raw';
-import { api } from '../../../../server/sdk/api';
+import { RocketChatFile } from '../../app/file';
+import { FileUpload } from '../../app/file-upload/server';
+import { Rooms, Messages } from '../../app/models/server';
+import { Avatars } from '../../app/models/server/raw';
+import { api } from '../sdk/api';
 
 export const setRoomAvatar = async function (rid: string, dataURI: string, user: Meteor.User): Promise<void> {
 	const fileStore = FileUpload.getStore('Avatars');

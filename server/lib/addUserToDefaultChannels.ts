@@ -1,9 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 
-import { Rooms, Subscriptions, Messages } from '../../../models/server';
-import { IRoom } from '../../../../definition/IRoom';
+import { Rooms, Subscriptions, Messages } from '../../app/models/server';
+import { IRoom } from '../../definition/IRoom';
 
-export const addUserToDefaultChannels = function (user: Meteor.User, silenced: boolean): void {
+export const addUserToDefaultChannels = function (user: Meteor.User, silenced: boolean | undefined): void {
 	const defaultRooms = Rooms.findByDefaultAndTypes(true, ['c', 'p'], {
 		fields: { usernames: 0 },
 	}).fetch();

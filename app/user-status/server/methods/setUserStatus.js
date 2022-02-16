@@ -2,7 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 import { settings } from '../../../settings/server';
-import { RateLimiter, setStatusText } from '../../../lib/server';
+import { RateLimiter } from '../../../lib/server';
+import { setStatusText } from '../../../../server/lib/setStatusText';
 
 export const setUserStatusMethod = (statusType, statusText) => {
 	const userId = Meteor.userId();

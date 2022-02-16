@@ -1,17 +1,17 @@
 import { Meteor } from 'meteor/meteor';
 import { parser } from '@rocket.chat/message-parser';
 
-import { Messages } from '../../../models/server';
-import { IMessage } from '../../../../definition/IMessage/IMessage';
-import { settings } from '../../../settings/server';
-import { callbacks } from '../../../../lib/callbacks';
-import { SystemLogger } from '../../../../server/lib/logger/system';
-import { Apps } from '../../../apps/server';
-import { parseUrlsInMessage } from './parseUrlsInMessage';
+import { Messages } from '../../app/models/server';
+import { IMessage } from '../../definition/IMessage/IMessage';
+import { settings } from '../../app/settings/server';
+import { callbacks } from '../../lib/callbacks';
+import { SystemLogger } from './logger/system';
+import { Apps } from '../../app/apps/server';
+import { parseUrlsInMessage } from '../../app/lib/server/functions/parseUrlsInMessage';
 
 const { DISABLE_MESSAGE_PARSER = 'false' } = process.env;
 
-export const updateMessage = function (message: IMessage, user: Meteor.User, originalMessage: IMessage | undefined): void {
+export const updateMessage = function (message: IMessage, user: Meteor.User, originalMessage: IMessage | undefined = undefined): void {
 	if (!originalMessage) {
 		originalMessage = Messages.findOneById(message._id);
 	}

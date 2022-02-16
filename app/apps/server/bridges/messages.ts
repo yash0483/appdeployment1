@@ -4,7 +4,7 @@ import { IUser } from '@rocket.chat/apps-engine/definition/users';
 import { IRoom } from '@rocket.chat/apps-engine/definition/rooms';
 
 import { Messages, Users, Subscriptions } from '../../../models/server';
-import { updateMessage } from '../../../lib/server/functions/updateMessage';
+import { updateMessage } from '../../../../server/lib/updateMessage';
 import { executeSendMessage } from '../../../lib/server/methods/sendMessage';
 import { api } from '../../../../server/sdk/api';
 import notifications from '../../../notifications/server/lib/Notifications';

@@ -1,11 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import s from 'underscore.string';
 
-import { Users } from '../../../models/server';
-import { Users as UsersRaw } from '../../../models/server/raw';
-import { hasPermission } from '../../../authorization/server';
-import { RateLimiter } from '../lib';
-import { api } from '../../../../server/sdk/api';
+import { Users } from '../../app/models/server';
+import { Users as UsersRaw } from '../../app/models/server/raw';
+import { hasPermission } from '../../app/authorization/server';
+import { RateLimiter } from '../../app/lib/server/lib';
+import { api } from '../sdk/api';
 
 export const _setStatusTextPromise = async function (userId: string, statusText: string): Promise<boolean> {
 	if (!userId) {

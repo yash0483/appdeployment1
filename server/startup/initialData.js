@@ -6,7 +6,8 @@ import { FileUpload } from '../../app/file-upload/server';
 import { addUserRoles, getUsersInRole } from '../../app/authorization/server';
 import { Users, Rooms } from '../../app/models/server';
 import { settings } from '../../app/settings/server';
-import { checkUsernameAvailability, addUserToDefaultChannels } from '../../app/lib/server';
+import { checkUsernameAvailability } from '../../app/lib/server';
+import { addUserToDefaultChannels } from '../lib/addUserToDefaultChannels';
 import { Settings } from '../../app/models/server/raw';
 import { validateEmail } from '../../lib/emailValidator';
 

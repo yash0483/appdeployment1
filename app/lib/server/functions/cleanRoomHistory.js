@@ -1,6 +1,6 @@
 import { TAPi18n } from 'meteor/rocketchat:tap-i18n';
 
-import { deleteRoom } from './deleteRoom';
+import { deleteRoom } from '../../../../server/lib/deleteRoom';
 import { FileUpload } from '../../../file-upload/server';
 import { Messages, Rooms, Subscriptions } from '../../../models/server';
 import { Notifications } from '../../../notifications/server';
@@ -39,7 +39,6 @@ export const cleanRoomHistory = function ({
 	if (filesOnly) {
 		return fileCount;
 	}
-
 	if (!ignoreDiscussion) {
 		Messages.findDiscussionByRoomIdPinnedTimestampAndUsers(
 			rid,

@@ -1,7 +1,7 @@
 import { clientLogger } from '../lib/logger';
 import { FederationRoomEvents, Subscriptions } from '../../../models/server';
 import { normalizers } from '../normalizers';
-import { deleteRoom } from '../../../lib/server/functions';
+import { deleteRoom } from '../../../../server/lib/deleteRoom';
 import { getFederationDomain } from '../lib/getFederationDomain';
 import { dispatchEvents } from '../handler';
 import { isFullyQualified } from '../functions/helpers';

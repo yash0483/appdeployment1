@@ -1,9 +1,9 @@
 import { TAPi18n } from 'meteor/rocketchat:tap-i18n';
 
-import { LivechatRooms } from '../../../models/server';
-import { IUser } from '../../../../definition/IUser';
-import { settings } from '../../../settings/server';
-import { Livechat } from '../../../livechat/server/lib/Livechat';
+import { LivechatRooms } from '../../app/models/server';
+import { IUser } from '../../definition/IUser';
+import { settings } from '../../app/settings/server';
+import { Livechat } from '../../app/livechat/server/lib/Livechat';
 
 type SubscribedRooms = {
 	rid: string;

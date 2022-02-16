@@ -1,6 +1,6 @@
 import { callbacks } from '../../../../lib/callbacks';
 import { Messages, Rooms } from '../../../models/server';
-import { deleteRoom } from '../../../lib/server';
+import { deleteRoom } from '../../../../server/lib/deleteRoom';
 
 /**
  * We need to propagate the writing of new message in a discussion to the linking

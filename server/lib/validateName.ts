@@ -1,4 +1,4 @@
-import { settings } from '../../../settings/server';
+import { settings } from '../../app/settings/server';
 
 export const validateName = function (name: string): boolean {
 	const blockedNames = settings.get('Accounts_SystemBlockedUsernameList');

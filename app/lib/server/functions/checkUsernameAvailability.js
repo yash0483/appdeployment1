@@ -5,7 +5,7 @@ import { escapeRegExp } from '@rocket.chat/string-helpers';
 
 import { settings } from '../../../settings/server';
 import { Team } from '../../../../server/sdk';
-import { validateName } from './validateName';
+import { validateName } from '../../../../server/lib/validateName';
 
 let usernameBlackList = [];
 

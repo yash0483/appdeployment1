@@ -1,12 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import s from 'underscore.string';
 
-import { Users } from '../../../models/server';
-import { settings } from '../../../settings/server';
-import { hasPermission } from '../../../authorization/server';
-import { IUser } from '../../../../definition/IUser';
-import { RateLimiter } from '../lib';
-import { api } from '../../../../server/sdk/api';
+import { Users } from '../../app/models/server';
+import { settings } from '../../app/settings/server';
+import { hasPermission } from '../../app/authorization/server';
+import { IUser } from '../../definition/IUser';
+import { RateLimiter } from '../../app/lib/server';
+import { api } from '../sdk/api';
 
 export const _setRealName = function (userId: string, name: string, fullUser: IUser): IUser | boolean {
 	name = s.trim(name);

@@ -3,7 +3,7 @@ import { check } from 'meteor/check';
 
 import { hasPermission } from '../../../authorization/server';
 import { Rooms } from '../../../models/server';
-import { unarchiveRoom } from '../functions';
+import { unarchiveRoom } from '../../../../server/lib/unarchiveRoom';
 
 Meteor.methods({
 	unarchiveRoom(rid) {

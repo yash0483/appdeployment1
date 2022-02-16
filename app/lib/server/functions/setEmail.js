@@ -7,7 +7,7 @@ import { hasPermission } from '../../../authorization';
 import { RateLimiter, validateEmailDomain } from '../lib';
 import * as Mailer from '../../../mailer';
 import { settings } from '../../../settings';
-import { checkEmailAvailability } from '.';
+import { checkEmailAvailability } from '../../../../server/lib/checkEmailAvailability';
 
 let html = '';
 Meteor.startup(() => {

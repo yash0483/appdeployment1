@@ -4,7 +4,7 @@ import { escapeHTML } from '@rocket.chat/string-helpers';
 
 import { settings } from '../../settings';
 import { Rooms } from '../../models';
-import { validateName } from '../../lib/server/functions/validateName';
+import { validateName } from '../../../server/lib/validateName';
 
 export const getValidRoomName = (displayName, rid = '', options = {}) => {
 	let slugifiedName = displayName;

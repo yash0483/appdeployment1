@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 import { settings } from '../../../settings/server';
-import { setRealName } from '../functions';
+import { setRealName } from '../../../../server/lib/setRealName';
 import { RateLimiter } from '../lib';
 
 Meteor.methods({

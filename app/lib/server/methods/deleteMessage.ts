@@ -3,7 +3,7 @@ import { Match, check } from 'meteor/check';
 
 import { canDeleteMessage } from '../../../authorization/server/functions/canDeleteMessage';
 import { Messages } from '../../../models/server';
-import { deleteMessage } from '../functions';
+import { deleteMessage } from '../../../../server/lib/deleteMessage';
 import { IUser } from '../../../../definition/IUser';
 
 Meteor.methods({
