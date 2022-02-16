@@ -10,7 +10,11 @@ import { SlackAPI } from './SlackAPI';
 import { getUserAvatarURL } from '../../utils/lib/getUserAvatarURL';
 import { Messages, Rooms, Users } from '../../models';
 import { settings } from '../../settings';
-import { deleteMessage, updateMessage, addUserToRoom, removeUserFromRoom, archiveRoom, unarchiveRoom, sendMessage } from '../../lib';
+import { addUserToRoom, removeUserFromRoom, sendMessage } from '../../lib/server/functions';
+import { deleteMessage } from '../../../server/lib/deleteMessage';
+import { updateMessage } from '../../../server/lib/updateMessage';
+import { archiveRoom } from '../../../server/lib/archiveRoom';
+import { unarchiveRoom } from '../../../server/lib/unarchiveRoom';
 import { saveRoomName, saveRoomTopic } from '../../channel-settings';
 import { FileUpload } from '../../file-upload';
 

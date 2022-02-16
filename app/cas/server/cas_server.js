@@ -12,7 +12,7 @@ import { logger } from './cas_rocketchat';
 import { settings } from '../../settings';
 import { Rooms } from '../../models/server';
 import { CredentialTokens } from '../../models/server/raw';
-import { _setRealName } from '../../lib';
+import { _setRealName } from '../../../server/lib/setRealName';
 import { createRoom } from '../../lib/server/functions/createRoom';
 
 RoutePolicy.declare('/_cas/', 'network');

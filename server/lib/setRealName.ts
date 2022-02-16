@@ -8,7 +8,7 @@ import { IUser } from '../../definition/IUser';
 import { RateLimiter } from '../../app/lib/server';
 import { api } from '../sdk/api';
 
-export const _setRealName = function (userId: string, name: string, fullUser: IUser): IUser | boolean {
+export const _setRealName = function (userId: string, name: string, fullUser: IUser | undefined): IUser | boolean {
 	name = s.trim(name);
 	if (!userId || (settings.get('Accounts_RequireNameForSignUp') && !name)) {
 		return false;
