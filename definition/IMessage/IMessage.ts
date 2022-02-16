@@ -49,7 +49,7 @@ export interface IMessage extends IRocketChatRecord {
 	alias?: string;
 	md?: ReturnType<typeof parser>;
 
-	editedAt?: Date;
+	editedAt?: Date | string;
 	editedBy?: Record<string, string>;
 
 	_hidden?: boolean;
