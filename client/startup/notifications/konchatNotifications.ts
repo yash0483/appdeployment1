@@ -42,25 +42,6 @@ type NotificationEvent = {
 	};
 };
 
-function notifyNewMessageAudio(rid: string): void {
-	const openedRoomId = Session.get('openedRoom');
-
-	// This logic is duplicated in /client/startup/unread.coffee.
-	const hasFocus = readMessage.isEnable();
-	const messageIsInOpenedRoom = openedRoomId === rid;
-	const muteFocusedConversations = getUserPreference(Meteor.userId(), 'muteFocusedConversations');
-
-	if (isLayoutEmbedded()) {
-		if (!hasFocus && messageIsInOpenedRoom) {
-			// Play a notification sound
-			KonchatNotification.newMessage(rid);
-		}
-	} else if (!hasFocus || !messageIsInOpenedRoom || !muteFocusedConversations) {
-		// Play a notification sound
-		KonchatNotification.newMessage(rid);
-	}
-}
-
 Meteor.startup(() => {
 	Tracker.autorun(() => {
 		if (!Meteor.userId()) {
@@ -68,14 +49,11 @@ Meteor.startup(() => {
 		}
 
 		Notifications.onUser('notification', (notification: NotificationEvent) => {
-			let openedRoomId = undefined;
-			if (['channel', 'group', 'direct'].includes(FlowRouter.getRouteName())) {
-				openedRoomId = Session.get('openedRoom');
-			}
-
 			// This logic is duplicated in /client/startup/unread.coffee.
-			const hasFocus = readMessage.isEnable();
-			const messageIsInOpenedRoom = openedRoomId === notification.payload.rid;
+			const hasFocus = readMessage.isEnabled();
+			const muteFocusedConversations = getUserPreference(Meteor.userId(), 'muteFocusedConversations');
+			const { rid } = notification.payload;
+			const messageIsInOpenedRoom = Session.get('openedRoom') === notification.payload.rid;
 
 			fireGlobalEvent('notification', {
 				notification,
@@ -83,17 +61,29 @@ Meteor.startup(() => {
 				hasFocus,
 			});
 
+			/*
+			 * If the user is using the embedded layout, we don't have sidebar neither the concept of more rooms,
+			 * so if somehow the user receives a notification in a room that is not open, we don't show the notification.
+			 */
 			if (isLayoutEmbedded()) {
-				if (!hasFocus && messageIsInOpenedRoom) {
-					// Show a notification.
+				if (messageIsInOpenedRoom && hasFocus) {
 					KonchatNotification.showDesktop(notification);
+					KonchatNotification.newMessage(rid);
 				}
-			} else if (!hasFocus || !messageIsInOpenedRoom) {
-				// Show a notification.
-				KonchatNotification.showDesktop(notification);
+				return;
 			}
 
-			notifyNewMessageAudio(notification.payload.rid);
+			/*
+			 * In the other hand, if the user is using the normal layout, we have the sidebar and multiple rooms,
+			 * then want to show the notification only if the notification is not from the current one
+			 */
+
+			(!hasFocus || !messageIsInOpenedRoom) && KonchatNotification.showDesktop(notification);
+
+			/*
+			 * Even so, the user has a setting to make 'plim' even if the notification is from the current room
+			 */
+			hasFocus && messageIsInOpenedRoom && !muteFocusedConversations && KonchatNotification.newMessage(rid);
 		});
 
 		CachedChatSubscription.onSyncData = ((action: 'changed' | 'removed', sub: ISubscription): void => {

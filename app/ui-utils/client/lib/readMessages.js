@@ -95,8 +95,8 @@ export const readMessage = new (class extends Emitter {
 		this.enabled = document.hasFocus();
 	}
 
-	isEnable() {
-		return this.enabled === true;
+	isEnabled() {
+		return this.enabled === document.hasFocus();
 	}
 
 	refreshUnreadMark(rid) {
