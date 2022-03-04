@@ -1,10 +1,11 @@
 import { Emitter } from '@rocket.chat/emitter';
+import toastr from 'toastr';
 
 export type ToastMessagePayload = {
 	type: 'success' | 'info' | 'warning' | 'error';
 	message: string | Error;
 	title?: string;
-	options?: object;
+	options?: typeof toastr['options'];
 };
 
 const emitter = new Emitter<{
