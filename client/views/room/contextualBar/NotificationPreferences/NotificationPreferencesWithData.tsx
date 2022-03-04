@@ -1,5 +1,5 @@
 import { useMutableCallback } from '@rocket.chat/fuselage-hooks';
-import React, { memo } from 'react';
+import React, { memo, ReactElement } from 'react';
 
 import { useCustomSound } from '../../../../contexts/CustomSoundContext';
 import { useTranslation } from '../../../../contexts/TranslationContext';
@@ -9,7 +9,7 @@ import { useForm } from '../../../../hooks/useForm';
 import { useTabBarClose } from '../../providers/ToolboxProvider';
 import NotificationPreferences from './NotificationPreferences';
 
-const NotificationPreferencesWithData = ({ rid }) => {
+const NotificationPreferencesWithData = ({ rid }: { rid: string }): ReactElement => {
 	const t = useTranslation();
 
 	const subscription = useUserSubscription(rid);
@@ -35,7 +35,7 @@ const NotificationPreferencesWithData = ({ rid }) => {
 		['nothing', t('Nothing')],
 	];
 
-	const customSoundAsset = Object.entries(customSound.list.get()).map((value) => [value[0], value[1].name]);
+	const customSoundAsset = customSound.list.entries().map((value) => [value[0], value[1].name]);
 
 	const handleOptions = {
 		alerts: defaultOption,
@@ -43,7 +43,7 @@ const NotificationPreferencesWithData = ({ rid }) => {
 		sound: [['none None', t('None')], ['default', t('Default')], ...customSoundAsset],
 	};
 
-	const handlePlaySound = () => customSound.play(values.desktopSound);
+	const handlePlaySound = (): void => customSound.play(values.desktopSound);
 
 	const handleSaveButton = useMutableCallback(() => {
 		const notifications = {};
