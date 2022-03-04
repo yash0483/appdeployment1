@@ -1,3 +1,3 @@
-import './SoundAndDesktopNotifications';
+import './soundAndDesktopNotifications';
 import './updateAvatar';
 import './usersNameChanged';
