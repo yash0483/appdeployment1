@@ -5,7 +5,7 @@ import { settings } from '../../../settings/client';
 import { Subscriptions } from '../../../models/client';
 import { KonchatNotification } from '../../../ui';
 
-let audio = null;
+let audio: HTMLAudioElement = null;
 
 Meteor.startup(() => {
 	Tracker.autorun(() => {
