@@ -302,7 +302,7 @@
 		"react-query": "^3.33.1",
 		"react-virtuoso": "^1.2.4",
 		"semver": "^5.7.1",
-		"sharp": "^0.29.3",
+		"sharp": "^0.31.3",
 		"sip.js": "^0.20.0",
 		"sodium-native": "^3.2.1",
 		"sodium-plus": "^0.9.0",
